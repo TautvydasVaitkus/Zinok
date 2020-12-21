@@ -6,7 +6,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'ZINOK') }}</title>
+    @if (Auth::guest())
+        <meta http-equiv="refresh" content="0; url={{ route('home') }}" />
+    @endif
+    @if (auth()->user()->role == 'Mokinys')
+        <meta http-equiv="refresh" content="0; url={{ route('home') }}" />
+    @endif
 </head>
+
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">Žinok</a>
@@ -25,9 +32,9 @@
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
                         aria-expanded="false">Veiklos kuriose esate</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        @foreach ($afters as $after)
+                            <li><a class="dropdown-item" href="/after/{{$after->id}}">{{$after->pavadinimas}}</a></li>
+                        @endforeach
                     </ul>
                 </li>
 

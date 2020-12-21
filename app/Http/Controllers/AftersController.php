@@ -15,7 +15,6 @@ class AftersController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -25,7 +24,9 @@ class AftersController extends Controller
      */
     public function create()
     {
-        return view('pages.afterSchool.createnewform');
+        $user_id = auth()->user()->id;
+        $user = After::where('mokytojo_id',$user_id)->get();
+        return view('pages.afterSchool.createnewform')->with('afters', $user);
     }
 
     /**
@@ -36,14 +37,14 @@ class AftersController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request,[
+        $this->validate($request, [
             'pavadinimas' => 'required',
             'aprasas' => 'required',
             'pradzios_data' => 'required',
-            'pabaigos_data'=> 'required',
-            'pradzios_laikas'=> 'required',
-            'pabaigos_laikas'=> 'required',
-            'max_dalyviu'=> 'required'
+            'pabaigos_data' => 'required',
+            'pradzios_laikas' => 'required',
+            'pabaigos_laikas' => 'required',
+            'max_dalyviu' => 'required'
         ]);
 
         //Create post
@@ -55,9 +56,10 @@ class AftersController extends Controller
         $after->pradzios_laikas = $request->input('pradzios_laikas');
         $after->pabaigos_laikas = $request->input('pabaigos_laikas');
         $after->max_dalyviu = $request->input('max_dalyviu');
+        $after->mokytojo_id = auth()->user()->id;
         $after->save();
 
-        return redirect('/after/Teacher')->with('success','Sukurtas nauja veikla');
+        return redirect('/after')->with('success', 'Sukurtas nauja veikla');
     }
 
     /**
@@ -79,7 +81,8 @@ class AftersController extends Controller
      */
     public function edit($id)
     {
-        //
+        $form = After::find($id);
+        return view('pages.afterSchool.editform')->with('page',$form);
     }
 
     /**
@@ -91,7 +94,29 @@ class AftersController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'pavadinimas' => 'required',
+            'aprasas' => 'required',
+            'pradzios_data' => 'required',
+            'pabaigos_data' => 'required',
+            'pradzios_laikas' => 'required',
+            'pabaigos_laikas' => 'required',
+            'max_dalyviu' => 'required'
+        ]);
+
+        //Create post
+        $after =  After::find($id);
+        $after->pavadinimas = $request->input('pavadinimas');
+        $after->aparasas = $request->input('aprasas');
+        $after->pradzios_data = $request->input('pradzios_data');
+        $after->pabaigos_data = $request->input('pabaigos_data');
+        $after->pradzios_laikas = $request->input('pradzios_laikas');
+        $after->pabaigos_laikas = $request->input('pabaigos_laikas');
+        $after->max_dalyviu = $request->input('max_dalyviu');
+        $after->mokytojo_id = auth()->user()->id;
+        $after->save();
+
+        return redirect('/after/'.$id)->with('success', 'Sukurtas nauja veikla');
     }
 
     /**
@@ -102,6 +127,8 @@ class AftersController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $after = After::find($id);
+        $after->delete();
+        return redirect('/after')->with('success', 'Veikla sekmingai pakeista');
     }
 }

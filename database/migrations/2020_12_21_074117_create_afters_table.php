@@ -22,6 +22,8 @@ class CreateAftersTable extends Migration
             $table->time('pradzios_laikas');
             $table->time('pabaigos_laikas');
             $table->integer('max_dalyviu');
+            $table->unsignedInteger('mokytojo_id');
+            $table->foreign('mokytojo_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

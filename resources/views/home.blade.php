@@ -14,6 +14,13 @@
                     @endif
                     @if (auth()->user()->role == 'Mokytojas')
                     {{ __('Prisijungete su mokytojo paskyra: '.auth()->user()->name." ".auth()->user()->surname) }}
+
+                    
+                    @endif
+                    @if (auth()->user()->role == 'Mokinys')
+                    {{ __('Prisijungete su mokinio paskyra: '.auth()->user()->name." ".auth()->user()->surname) }}
+
+                    
                     @endif
             </div>
         </div>
