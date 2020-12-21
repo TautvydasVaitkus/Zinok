@@ -5,7 +5,6 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Prisijungimas') }}</div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,9 +12,9 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    {{ __('Sėkmingai prisijungta!') }}
-                </div>
+                    @if (auth()->user()->role == 'Mokytojas')
+                    {{ __('Prisijungete su mokytojo paskyra: '.auth()->user()->name." ".auth()->user()->surname) }}
+                    @endif
             </div>
         </div>
     </div>

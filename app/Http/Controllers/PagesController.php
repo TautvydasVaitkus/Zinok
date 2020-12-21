@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -14,11 +15,11 @@ class PagesController extends Controller
         return view('pages.feedback');
     }
 
-    public function afterSchool($role){
-        if($role == "Teacher"){
+    public function afterSchool(){
+        if(auth()->user()->role == 'Mokytojas'){
             return view('pages.afterSchool.teacher');
         }
-        else if($role == "Student"){
+        else if(auth()->user()->role == 'Studentas'){
             return view('pages.afterSchool.student');
         }
         else return view('home');

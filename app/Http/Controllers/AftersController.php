@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use App\Models\After;
 use Illuminate\Http\Request;
 
 class AftersController extends Controller
@@ -43,6 +45,19 @@ class AftersController extends Controller
             'pabaigos_laikas'=> 'required',
             'max_dalyviu'=> 'required'
         ]);
+
+        //Create post
+        $after = new After;
+        $after->pavadinimas = $request->input('pavadinimas');
+        $after->aparasas = $request->input('aprasas');
+        $after->pradzios_data = $request->input('pradzios_data');
+        $after->pabaigos_data = $request->input('pabaigos_data');
+        $after->pradzios_laikas = $request->input('pradzios_laikas');
+        $after->pabaigos_laikas = $request->input('pabaigos_laikas');
+        $after->max_dalyviu = $request->input('max_dalyviu');
+        $after->save();
+
+        return redirect('/after/Teacher')->with('success','Sukurtas nauja veikla');
     }
 
     /**
