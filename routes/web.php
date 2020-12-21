@@ -20,7 +20,8 @@ Route::get('/', function() {
 
 Route::get('/work', 'App\Http\Controllers\PagesController@work');
 Route::get('/feedback', 'App\Http\Controllers\PagesController@feedback');
-
+Route::get('/after/{role}','App\Http\Controllers\PagesController@afterSchool');
+Route::resource('/Teacher/After','App\Http\Controllers\AftersController');
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
