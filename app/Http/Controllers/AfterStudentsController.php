@@ -93,6 +93,8 @@ class AfterStudentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $after = AfterStudent::where('veiklos_id',$id)->where('mokynio_id',auth()->user()->id);
+        $after->delete();
+        return redirect('/after')->with('success', 'Sekmingai veikloje nebedalyvaujate');
     }
 }

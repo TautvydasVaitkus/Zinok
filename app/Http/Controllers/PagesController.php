@@ -43,12 +43,11 @@ class PagesController extends Controller
     public function afterSchoolPage($id){
         if (auth()->check()) {
             if (auth()->user()->role == 'Mokytojas') {
-                $page = After::where('mokytojo_id',$id)->first();
+                $page = After::where('id',$id)->first();
                 return view('pages.afterSchool.teacherPage')->with('page', $page);
             } else if (auth()->user()->role == 'Mokinys') {
-                $user_id = auth()->user()->id;
-                $user = After::select('pavadinimas','afters.id')->join('after_students','after_students.veiklos_id','=','afters.id')->where('after_students.mokynio_id',$user_id)->get();
-                return view('pages.afterSchool.studentPage');
+                $page = After::where('id',$id)->first();
+                return view('pages.afterSchool.studentPage')->with('page', $page);
             } else return view('home');
         } else {
             return redirect('/');
