@@ -16,6 +16,7 @@ class CreateAftersTable extends Migration
         Schema::create('afters', function (Blueprint $table) {
             $table->increments('id');
             $table->string('pavadinimas');
+            $table->string('aparasas');
             $table->date('pradzios_data');
             $table->date('pabaigos_data');
             $table->time('pradzios_laikas');
