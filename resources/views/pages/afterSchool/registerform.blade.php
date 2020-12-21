@@ -1,7 +1,7 @@
 @section('content')
     <h1>Registraciją į naują veiklą</h1>
     @if(count($data)>0)
-        {!! Form::open(['action' => 'App\Http\Controllers\AftersController@store', 'method' => 'POST']) !!}
+        {!! Form::open(['action' => 'App\Http\Controllers\AfterStudentsController@store', 'method' => 'POST']) !!}
         <div class="form-group">
             {{ Form::label('pavadinimas', 'Pavadinimas:') }}
             {!! Form::select('pavadinimas', $data, null, ['class' => 'form-control']) !!}

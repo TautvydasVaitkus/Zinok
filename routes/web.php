@@ -22,7 +22,7 @@ Route::get('/work', 'App\Http\Controllers\PagesController@work');
 Route::get('/feedback', 'App\Http\Controllers\PagesController@feedback');
 Route::get('/after','App\Http\Controllers\PagesController@afterSchool');
 Route::get('/after/{id}','App\Http\Controllers\PagesController@afterSchoolPage');
-Route::get('/Student/After/create','App\Http\Controllers\AfterStudentsController@create');
+Route::resource('/Student/After','App\Http\Controllers\AfterStudentsController');
 Route::resource('/Teacher/After','App\Http\Controllers\AftersController');
 Auth::routes();
 

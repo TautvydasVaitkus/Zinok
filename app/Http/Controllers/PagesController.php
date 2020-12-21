@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\After;
+use App\Models\AfterStudent;
 
 class PagesController extends Controller
 {
@@ -25,7 +26,9 @@ class PagesController extends Controller
                 $user = After::where('mokytojo_id',$user_id)->get();
                 return view('pages.afterSchool.teacher')->with('afters', $user);
             } else if (auth()->user()->role == 'Mokinys') {
-                return view('pages.afterSchool.student');
+                $user_id = auth()->user()->id;
+                $user = After::select('pavadinimas','afters.id')->join('after_students','after_students.veiklos_id','=','afters.id')->where('after_students.mokynio_id',$user_id)->get();
+                return view('pages.afterSchool.student')->with('data',$user);
             } else return view('home');
         } else {
             return redirect('/');
@@ -43,7 +46,9 @@ class PagesController extends Controller
                 $page = After::where('mokytojo_id',$id)->first();
                 return view('pages.afterSchool.teacherPage')->with('page', $page);
             } else if (auth()->user()->role == 'Mokinys') {
-                return view('pages.afterSchool.page.student');
+                $user_id = auth()->user()->id;
+                $user = After::select('pavadinimas','afters.id')->join('after_students','after_students.veiklos_id','=','afters.id')->where('after_students.mokynio_id',$user_id)->get();
+                return view('pages.afterSchool.studentPage');
             } else return view('home');
         } else {
             return redirect('/');

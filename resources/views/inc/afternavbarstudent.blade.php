@@ -17,7 +17,7 @@
 
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Žinok</a>
+        <a class="navbar-brand" href="/home">Žinok</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExampleDefault"
             aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -31,11 +31,11 @@
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
-                        aria-expanded="false">Jūsų dalyvaujamos veiklos</a>
+                        aria-expanded="false">Veiklos kuriose esate</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        @foreach ($data as $dat)
+                            <li><a class="dropdown-item" href="/after/{{$dat->id}}">{{$dat->pavadinimas}}</a></li>
+                        @endforeach
                     </ul>
                 </li>
 
