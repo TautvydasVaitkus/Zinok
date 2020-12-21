@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class After extends Model
 {
-    use HasFactory;
+    //Primary Key
+    public $primaryKey = 'id';
 }

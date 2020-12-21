@@ -23,7 +23,7 @@ class AftersController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.afterSchool.createnewform');
     }
 
     /**
@@ -34,7 +34,15 @@ class AftersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'pavadinimas' => 'required',
+            'aprasas' => 'required',
+            'pradzios_data' => 'required',
+            'pabaigos_data'=> 'required',
+            'pradzios_laikas'=> 'required',
+            'pabaigos_laikas'=> 'required',
+            'max_dalyviu'=> 'required'
+        ]);
     }
 
     /**

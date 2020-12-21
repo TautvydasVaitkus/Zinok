@@ -1,20 +1,38 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="{{asset('css/app.css')}}">
-        <title>{{config('app.name','ZINOK')}}</title>
-    </head>
+@section('content')
+    <h1>Naujos veiklos formą</h1>
 
-    
-
-    @include('inc.afternavbarteacher')
-    <div class="container">
-        <h1>Naujos veiklos formą</h1>
-        
+    {!! Form::open(['action' => 'App\Http\Controllers\AftersController@store', 'method' => 'POST']) !!}
+    <div class="form-group">
+        {{ Form::label('pavadinimas', 'Pavadinimas:') }}
+        {{ Form::text('pavadinimas', '', ['class' => 'form-control', 'placeholder' => 'Pavadinimas']) }}
     </div>
+    <div class="form-group">
+        {{ Form::label('aprasas', 'Užsiėmimo aprašas:') }}
+        {{ Form::textarea('aprasas', '', ['class' => 'form-control', 'placeholder' => 'Detalus neformalios veiklos aprašas.']) }}
+    </div>
+    <div class="form-group">
+        {{ Form::label('pradzios_data', 'Užsiėmimo pradžios data:') }}
+        {{ Form::date('pradzios_data', '', ['class' => 'form-control']) }}
+    </div>
+    <div class="form-group">
+        {{ Form::label('pabaigos_data', 'Užsiėmimo pabaigos data:') }}
+        {{ Form::date('pabaigos_data', '', ['class' => 'form-control']) }}
+    </div>
+    <div class="form-group">
+        {{ Form::label('pradzios_laikas', 'Užsiėmimo pradžios laikas:') }}
+        {{ Form::time('pradzios_laikas', '', ['class' => 'form-control']) }}
+    </div>
+    <div class="form-group">
+        {{ Form::label('pabaigos_laikas', 'Užsiėmimo pabaigos laikas:') }}
+        {{ Form::time('pabaigos_laikas', '', ['class' => 'form-control']) }}
+    </div>
+    <div class="form-group">
+        {{ Form::label('max_dalyviu', 'Maksimalus dalyvių skaičius:') }}
+        {{ Form::number('max_dalyviu', '', ['class' => 'form-control']) }}
+    </div>
+    {{ Form::submit('Sukurti', ['class' => 'btn btn-primary']) }}
+    {!! Form::close() !!}
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
-    
-    </html>
+@endsection
+
+@include('inc.afternavbarteacher')
